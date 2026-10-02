@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#191c1e">
+  <meta name="color-scheme" content="dark">
+  <title>记忆编辑师 · 澄明文字会谈</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <section id="welcome" class="welcome">
+    <header class="brand"><span class="brand-mark" aria-hidden="true">澄</span><div>澄明<span class="brand-sub">远程照护 · 文字会谈</span></div><span class="edition">小范围试玩</span></header>
+    <main class="welcome-content">
+      <div class="welcome-art" aria-hidden="true"><div class="ring ring-one"></div><div class="ring ring-two"></div><div class="ring ring-three"></div><span class="art-caption">听见 · 记得 · 理解</span></div>
+      <div class="welcome-copy"><p class="eyebrow">记忆编辑师 / 首次会谈</p><h1>有些事，<br>可以慢慢想起。</h1><p class="welcome-lead">三位朋友托你帮助伊莱。<br>他记得一些细节，却说不清那是谁的过去。</p>
+      <form id="login-form" class="login-form">
+        <label for="login-kind">选择 API 使用方式</label>
+        <select id="login-kind" name="kind"><option value="byok">使用我自己的 DeepSeek API Key</option><option value="invite">使用邀请人的邀请码</option></select>
+        <label id="credential-label" for="access-code">DeepSeek API Key（不是网页版账号密码）</label>
+        <div class="code-entry"><input id="access-code" name="credential" type="password" autocomplete="off" spellcheck="false" required minlength="16" maxlength="256" placeholder="DeepSeek API Key" aria-describedby="credential-notice login-error"><button class="primary" type="submit">进入会谈 <span aria-hidden="true">↗</span></button></div>
+        <p id="credential-notice" class="privacy-copy">Key 会经本站服务端调用 DeepSeek，不写入存档或浏览器存储，退出或闲置 30 分钟后释放。请仅在可信站点输入；网站运营者和 HTTPS 中转服务可能接触 Key。更私密的方式是在自己的电脑部署。</p>
+        <label class="consent"><input type="checkbox" id="credential-consent" required>我了解凭据传输方式、API 计费及会谈存档说明。</label>
+        <p id="login-error" class="error" role="alert"></p>
+      </form>
+      <div class="welcome-details"><span>无需注册</span><span>约 20—40 分钟</span><span>戴耳机，或安静阅读</span></div>
+      <p class="privacy-copy">会谈和研判保存在本站服务器，运营者可以查看；请不要填写真实隐私或医疗信息。API 调用按所选 Key 的账户计费，DeepSeek 网页免费聊天额度不能用于 API。邀请码是凭据，一码对应同一局，请勿共用。</p></div>
+    </main><footer class="welcome-footer"><span>一场关于记忆与选择的文字游戏</span><span id="connection-mode">正在连接工作台…</span></footer>
+  </section>
+
+  <div id="workspace" class="workspace" hidden>
+    <aside class="desktop-aside"><div class="brand"><span class="brand-mark" aria-hidden="true">澄</span><div>澄明<span class="brand-sub">远程照护平台</span></div></div><div class="aside-copy"><p class="eyebrow">治疗师工作台</p><h2>每一句话，<br>都留下痕迹。</h2><p>先听见一个人，<br>再试着理解他的过去。</p></div><div class="aside-foot">记忆编辑师<span>小范围试玩 · 01</span></div></aside>
+    <main class="console">
+      <header class="session-header"><div class="patient-avatar" aria-hidden="true">伊</div><div class="patient-info"><h1>伊莱 <span class="live-dot"></span></h1><p id="session-caption">文字会谈 · 仅通过文字联系</p></div><button id="sound-toggle" class="icon-button" aria-label="开启环境声" title="环境声默认关闭">♫</button><button id="help-button" class="icon-button" aria-label="查看规则与委托背景">?</button><button id="end-button" class="quiet-button">结案</button></header>
+      <section class="session-status" aria-label="患者状态"><div class="status-item"><span>信任</span><div id="trust-bar" class="bar" role="img" aria-label="信任"></div><small id="trust-label"></small></div><div class="status-item"><span>稳定</span><div id="stability-bar" class="bar" role="img" aria-label="稳定"></div><small id="stability-label"></small></div><div class="status-item"><span>清晰</span><div id="clarity-bar" class="bar" role="img" aria-label="清晰"></div><small id="clarity-label"></small></div></section>
+      <div id="crisis-banner" class="crisis-banner" role="status" hidden></div>
+      <div class="account-strip"><span id="account-status">API 凭据</span><button id="account-button" class="text-button">凭据 / 退出</button></div>
+      <section id="chat-panel" class="panel chat-panel" aria-label="会谈"><div id="chat-scroll" class="chat-scroll"><div class="session-divider"><span>会谈记录</span><span id="round-label">尚未开始</span></div><div class="notice"><span class="notice-mark">↗</span><p>这里的话会同步给三位委托人。<br><strong>邮件与私人研判不会发送给伊莱。</strong></p><button id="brief-button">了解委托</button></div><div id="messages" aria-live="polite" aria-relevant="additions"></div><div id="thinking" class="thinking" role="status" hidden><span class="thinking-dots">···</span>伊莱正在整理思绪，文字有时需要一点时间。</div><div id="ending-card" class="ending-card" hidden></div></div></section>
+      <section id="mail-panel" class="panel tool-panel" aria-label="邮件" hidden><div class="panel-heading"><p class="eyebrow">联系人来信</p><h2>有些线索，来自会谈之外。</h2><p>阅读与忽略均不消耗治疗回合。</p></div><div id="mail-list"></div></section>
+      <section id="clues-panel" class="panel tool-panel" aria-label="治疗记录" hidden><div class="panel-heading"><p class="eyebrow">治疗记录</p><h2>他说过的，先留下来。</h2><p>记录不等于事实。受暗示影响或失稳时的细节仍需核实。</p></div><div id="clue-list"></div></section>
+      <section id="notes-panel" class="panel tool-panel" aria-label="私人研判" hidden><div class="panel-heading"><p class="eyebrow">仅自己可见</p><h2>给尚未成形的判断，<br>留一点空间。</h2><p>不会同步给伊莱或三位委托人。记录不消耗回合。</p></div><form id="note-form"><label class="sr-only" for="note-text">私人研判</label><textarea id="note-text" rows="4" maxlength="1200" placeholder="哪些细节对不上？你还想核实什么？"></textarea><div class="form-actions"><button id="clear-note" type="button" class="quiet-button">取消草稿</button><button type="submit" class="primary">保存研判</button></div></form><div id="note-list"></div></section>
+      <section id="composer" class="composer"><div class="composer-top"><span id="composer-caption">选择这句话的方式</span><button id="hint-button" class="text-button">不知道问什么？</button></div><div class="operation-group" role="group" aria-label="会谈方式"><button type="button" data-operation="inquire" class="operation active" aria-pressed="true"><span>询问</span><small>核对细节</small></button><button type="button" data-operation="empathize" class="operation" aria-pressed="false"><span>共情</span><small>回应感受</small></button><button type="button" data-operation="suggest" class="operation" aria-pressed="false"><span>暗示</span><small>提供解释</small></button></div><form id="talk-form"><label class="sr-only" for="player-text">你对伊莱说的话</label><textarea id="player-text" rows="2" maxlength="1200" placeholder="你想对伊莱说什么？"></textarea><div class="composer-bottom"><span id="operation-help">从已经出现的细节问起，不必急着给答案。</span><button id="send-button" type="submit" class="primary">发送 <span aria-hidden="true">↑</span></button></div></form><div id="retry-row" class="retry-row" hidden><span>有一条操作尚未确认完成。</span><button id="retry-button" class="text-button">检查并重试</button><button id="discard-button" class="text-button">保留草稿</button></div></section>
+      <nav class="bottom-nav" aria-label="工作台导航"><button data-tab="chat" class="nav-item active" aria-current="page"><span aria-hidden="true">◌</span>会谈</button><button data-tab="mail" class="nav-item"><span aria-hidden="true">✉</span>邮件 <b id="mail-badge" hidden></b></button><button data-tab="clues" class="nav-item"><span aria-hidden="true">▤</span>记录</button><button data-tab="notes" class="nav-item"><span aria-hidden="true">⌁</span>研判</button></nav>
+    </main>
+  </div>
+  <dialog id="modal"><div class="modal-top"><span id="modal-eyebrow" class="eyebrow">会谈工具</span><button id="close-modal" class="icon-button" aria-label="关闭并返回">×</button></div><h2 id="modal-title"></h2><div id="modal-body"></div></dialog>
+  <div id="toast" role="status" hidden></div>
+  <noscript>这场会谈需要浏览器启用 JavaScript。</noscript>
+</body>
+</html>

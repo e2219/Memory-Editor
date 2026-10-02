@@ -1,0 +1,16 @@
+{
+  "name": "memory-editor",
+  "version": "0.2.0",
+  "description": "A dialogue-driven memory mystery game with a deterministic rules engine and DeepSeek narration.",
+  "engines": { "node": ">=22.6.0" },
+  "repository": { "type": "git", "url": "https://github.com/e2219/Memory-Editor.git" },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "play": "node --experimental-strip-types src/cli.ts",
+    "web": "node --experimental-strip-types src/web.ts",
+    "invite": "node --experimental-strip-types src/invites.ts",
+    "diagnose:deepseek": "node --experimental-strip-types src/diagnose-deepseek.ts"
+  }
+}
